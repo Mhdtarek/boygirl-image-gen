@@ -125,7 +125,7 @@ def create_video(image_dir, music_dir, output_path, type_text, first_part_text, 
 if __name__ == "__main__":
     image_directory = "./images"  # Assuming "images" is in the same directory as the script.
     music_directory = "./music"  # Assuming "music" is in the same directory as the script.
-    
+
     output_directory = "output_videos"
     if not os.path.exists(output_directory):
         os.makedirs(output_directory)
@@ -133,12 +133,19 @@ if __name__ == "__main__":
     with open("data.json", "r") as file:
         data = json.load(file)
 
+    # Initialize the video counter
+    video_counter = 1
+
     for entry in data:
         type_text = entry["type"].capitalize() + " Facts"
         first_part_text = entry["firstpart"]
         second_part_text = entry["secondpart"]
 
         create_video(image_directory, music_directory, output_directory, type_text, first_part_text, second_part_text)
+
+        # Print the video number
+        print(f"Video {video_counter} created.")
+        video_counter += 1
 
     with open("data.json", "w") as file:
         json.dump(data, file)
